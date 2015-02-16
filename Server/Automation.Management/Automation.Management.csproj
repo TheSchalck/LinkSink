@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Include="Database\BaseDatabaseCmdlet.cs" />
     <Compile Include="Database\LinkSinkDatabaseCmdlet.cs" />
+    <Compile Include="Database\UpdateLinkSinkDatabaseCmdlet.cs" />
+    <Compile Include="Database\RemoveLinkSinkDatabaseCmdlet.cs" />
+    <Compile Include="Database\NewLinkSinkDatabaseCmdlet.cs" />
     <Compile Include="Extension\EntityExceptionExtensions.cs" />
     <Compile Include="Infrastructure\AppConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,7 +64,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="PostDeploy.ps1" />
+    <None Include="PostDeploy.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

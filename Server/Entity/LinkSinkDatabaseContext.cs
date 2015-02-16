@@ -13,10 +13,13 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         //public virtual IDbSet<MessageSource> MessageSources { get { return Set<MessageSource>(); } }
         //public virtual IDbSet<ReceiverBase> Receivers { get { return Set<ReceiverBase>(); } }
         //public virtual IDbSet<MessageRead> MessageReads { get { return Set<MessageRead>(); } }
+        public virtual IDbSet<User> Users { get { return Set<User>(); } }
+        public virtual IDbSet<Role> Roles { get { return Set<Role>(); } }
+        public virtual IDbSet<UserRole> UserRoles { get { return Set<UserRole>(); } }
 
 
         public LinkSinkDatabaseContext()
-            : this("kuMessageStoreDbConnection")
+            : this("linkSinkDbConnection")
         { }
         public LinkSinkDatabaseContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
@@ -39,38 +42,18 @@ namespace Dk.Schalck.LinkSink.Server.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Fase 2 messages....
-            //modelBuilder.Entity<Message>().HasKey(x => x.Id).ToTable("Message");
 
-            //modelBuilder.Entity<Message>()
-            //    .HasRequired(x => x.MessageSource)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.MessageSourceId);
+            modelBuilder.Entity<UserRole>()
+                .HasRequired(x => x.Role)
+                .WithMany()
+                .HasForeignKey(x => x.RoleId);
 
-            //modelBuilder.Entity<MessageSource>()
-            //    .HasKey(x => x.Id)
-            //    .ToTable("MessageSource");
 
-            //modelBuilder.Entity<ReceiverBase>()
-            //    .HasKey(x => x.Id)
-            //    .ToTable("Receiver");
+            modelBuilder.Entity<UserRole>()
+                .HasRequired(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId);
 
-            //modelBuilder.Entity<Message>()
-            //    .HasMany<ReceiverBase>(x => x.Receivers)
-            //    .WithRequired(x => x.Message)
-            //    .HasForeignKey(x => x.MessageId);
-
-            //modelBuilder.Entity<MessageRead>().HasKey(x => x.Id).ToTable("MessageRead");
-
-            //modelBuilder.Entity<MessageRead>()
-            //    .HasRequired(x => x.TheMessage)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.MessageId);
-
-            //modelBuilder.Entity<Message>()
-            //    .HasMany<MessageRead>(x => x.MessageReads)
-            //    .WithRequired(x => x.TheMessage)
-            //    .HasForeignKey(x => x.MessageId);
         }
     }
 }
