@@ -54,6 +54,18 @@ namespace Dk.Schalck.LinkSink.Server.Entity
                 .WithMany()
                 .HasForeignKey(x => x.UserId);
 
+
+            modelBuilder.Entity<Project>()
+                .HasMany(x => x.ProjectAdministrators)
+                .WithRequired(x => x.Project)
+                .HasForeignKey(x => x.ProjectId);
+
+            modelBuilder.Entity<ProjectAdministrator>()
+                .HasRequired(x => x.Project)
+                .WithMany()
+                .HasForeignKey(x => x.ProjectId);
+
+
         }
     }
 }

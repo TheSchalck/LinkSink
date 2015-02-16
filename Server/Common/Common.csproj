@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{24FED4DB-0870-4F4A-A307-C279537D139E}</ProjectGuid>
+    <ProjectGuid>{6073BAEC-36A5-4D97-B756-178989F925DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dk.Schalck.LinkSink.Server.Entity</RootNamespace>
-    <AssemblyName>Dk.Schalck.LinkSink.Server.Entity</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Dk.Schalck.LinkSink.Server.Common</RootNamespace>
+    <AssemblyName>Dk.Schalck.LinkSink.Server.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,14 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\SolutionFiles\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\SolutionFiles\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,22 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILinkSinkDatabaseContext.cs" />
-    <Compile Include="LinkSinkDatabaseContext.cs" />
-    <Compile Include="Migrations\CustomMigrationSqlGenerator.cs" />
-    <Compile Include="Migrations\LinkSinkDatabaseMigrationConfiguration.cs" />
-    <Compile Include="Project.cs" />
-    <Compile Include="ProjectAdministrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserRole.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
