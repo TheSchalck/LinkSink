@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
@@ -26,7 +23,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public string Description { get; set; }
 
         [Required]
-        public int PostStatus { get; set; }
+        public Enumerations.RecordStatus PostStatus { get; set; }
 
         [Required]
         public DateTime CreateDate { get; set; }

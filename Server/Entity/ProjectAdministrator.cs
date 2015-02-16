@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
@@ -37,7 +38,8 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [Required]
         public string CreatedBy { get; set; }
 
-
+        [Required]
+        public Enumerations.RecordStatus PostStatus { get; set; }
 
 
     }

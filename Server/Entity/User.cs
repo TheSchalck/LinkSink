@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
@@ -33,7 +34,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public string CreatedBy { get; set; }
 
         [Required]
-        public int PostStatus { get; set; }
+        public Enumerations.RecordStatus PostStatus { get; set; }
 
     }
 }
