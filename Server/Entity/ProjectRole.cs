@@ -29,6 +29,8 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [Required]
         public Enumerations.RecordStatus PostStatus { get; set; }
 
+        public virtual ICollection<ProjectMemberRole> ProjectMemberRoles { get; set; }
+
 
     }
 }

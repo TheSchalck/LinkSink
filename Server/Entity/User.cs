@@ -16,7 +16,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [Required]
         [Index(IsUnique = true, IsClustered = true)]
         [StringLength(128)]
-        public string UserId { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public string Name { get; set; }

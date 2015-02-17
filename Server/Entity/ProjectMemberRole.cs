@@ -14,13 +14,11 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public Guid Id { get; set; }
 
         [Required]
-        [Index(IsUnique = true, IsClustered = false)]
         public Guid ProjectMemberId { get; set; }
 
         public ProjectMember ProjectMember { get; set; }
 
         [Required]
-        [Index(IsUnique = true, IsClustered = false)]
         public Guid ProjectRoleId { get; set; }
 
         public ProjectRole ProjectRole { get; set; }

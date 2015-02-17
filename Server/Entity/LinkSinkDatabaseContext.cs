@@ -40,19 +40,6 @@ namespace Dk.Schalck.LinkSink.Server.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
-            //modelBuilder.Entity<UserRole>()
-            //    .HasRequired(x => x.Role)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.RoleId);
-
-
-            //modelBuilder.Entity<UserRole>()
-            //    .HasRequired(x => x.User)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.UserId);
-
-
             modelBuilder.Entity<Project>()
                 .HasMany(x => x.ProjectMembers)
                 .WithRequired(x => x.Project)
@@ -63,15 +50,28 @@ namespace Dk.Schalck.LinkSink.Server.Entity
                 .WithMany()
                 .HasForeignKey(x => x.ProjectId);
 
+
+            modelBuilder.Entity<ProjectMember>()
+                .HasMany(x => x.ProjectMemberRoles)
+                .WithRequired(x => x.ProjectMember)
+                .HasForeignKey(x => x.ProjectMemberId);
+
             //modelBuilder.Entity<ProjectMemberRole>()
             //    .HasRequired(x => x.ProjectMember)
             //    .WithMany()
             //    .HasForeignKey(x => x.ProjectMemberId);
 
+
+            modelBuilder.Entity<ProjectRole>()
+                .HasMany(x => x.ProjectMemberRoles)
+                .WithRequired(x => x.ProjectRole)
+                .HasForeignKey(x => x.ProjectRoleId);
+
             //modelBuilder.Entity<ProjectMemberRole>()
             //    .HasRequired(x => x.ProjectRole)
             //    .WithMany()
             //    .HasForeignKey(x => x.ProjectRoleId);
+
 
         }
     }

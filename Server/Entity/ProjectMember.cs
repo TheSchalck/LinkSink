@@ -39,6 +39,8 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public string CreatedBy { get; set; }
 
         [Required]
-        public Enumerations.RecordStatus PostStatus { get; set; }        
+        public Enumerations.RecordStatus PostStatus { get; set; }
+
+        public virtual ICollection<ProjectMemberRole> ProjectMemberRoles { get; set; }
     }
 }
