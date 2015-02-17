@@ -32,6 +32,6 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [Required]
         public string CreatedBy { get; set; }
 
-        public virtual ICollection<ProjectAdministrator> ProjectAdministrators { get; set; }
+        public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
     }
 }

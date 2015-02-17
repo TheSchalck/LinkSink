@@ -23,7 +23,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = automaticMigrationDataLossAllowed;
-            var tables = new List<string>() { "dbo.Users", "dbo.Roles", "dbo.UserRoles" };
+            var tables = new List<string>() { "dbo.Users", "dbo.ProjectRoles", "dbo.Projects", "dbo.ProjectMembers", "dbo.ProjectMemberRoles" };
             SetSqlGenerator("System.Data.SqlClient", new CustomMigrationSqlGenerator(tables));
 
         }

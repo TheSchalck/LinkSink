@@ -7,7 +7,7 @@ using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
-    public class Role
+    public class ProjectRole
     {
         [Required]
         [Index(IsUnique = true, IsClustered = false)]

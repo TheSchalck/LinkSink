@@ -9,13 +9,11 @@ namespace Dk.Schalck.LinkSink.Server.Entity
 {
     public class LinkSinkDatabaseContext : DbContext, ILinkSinkDatabaseContext
     {
-        //public virtual IDbSet<Message> Messages { get { return Set<Message>(); } }
-        //public virtual IDbSet<MessageSource> MessageSources { get { return Set<MessageSource>(); } }
-        //public virtual IDbSet<ReceiverBase> Receivers { get { return Set<ReceiverBase>(); } }
-        //public virtual IDbSet<MessageRead> MessageReads { get { return Set<MessageRead>(); } }
         public virtual IDbSet<User> Users { get { return Set<User>(); } }
-        public virtual IDbSet<Role> Roles { get { return Set<Role>(); } }
-        public virtual IDbSet<UserRole> UserRoles { get { return Set<UserRole>(); } }
+        public virtual IDbSet<ProjectRole> Roles { get { return Set<ProjectRole>(); } }
+        public virtual IDbSet<Project> Projects { get { return Set<Project>(); } }
+        public virtual IDbSet<ProjectMember> ProjectMembers { get { return Set<ProjectMember>(); } }
+        public virtual IDbSet<ProjectMemberRole> ProjectMemberRoles { get { return Set<ProjectMemberRole>(); } }
 
 
         public LinkSinkDatabaseContext()
@@ -43,28 +41,37 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<UserRole>()
-                .HasRequired(x => x.Role)
-                .WithMany()
-                .HasForeignKey(x => x.RoleId);
+            //modelBuilder.Entity<UserRole>()
+            //    .HasRequired(x => x.Role)
+            //    .WithMany()
+            //    .HasForeignKey(x => x.RoleId);
 
 
-            modelBuilder.Entity<UserRole>()
-                .HasRequired(x => x.User)
-                .WithMany()
-                .HasForeignKey(x => x.UserId);
+            //modelBuilder.Entity<UserRole>()
+            //    .HasRequired(x => x.User)
+            //    .WithMany()
+            //    .HasForeignKey(x => x.UserId);
 
 
             modelBuilder.Entity<Project>()
-                .HasMany(x => x.ProjectAdministrators)
+                .HasMany(x => x.ProjectMembers)
                 .WithRequired(x => x.Project)
                 .HasForeignKey(x => x.ProjectId);
 
-            modelBuilder.Entity<ProjectAdministrator>()
+            modelBuilder.Entity<ProjectMember>()
                 .HasRequired(x => x.Project)
                 .WithMany()
                 .HasForeignKey(x => x.ProjectId);
 
+            //modelBuilder.Entity<ProjectMemberRole>()
+            //    .HasRequired(x => x.ProjectMember)
+            //    .WithMany()
+            //    .HasForeignKey(x => x.ProjectMemberId);
+
+            //modelBuilder.Entity<ProjectMemberRole>()
+            //    .HasRequired(x => x.ProjectRole)
+            //    .WithMany()
+            //    .HasForeignKey(x => x.ProjectRoleId);
 
         }
     }

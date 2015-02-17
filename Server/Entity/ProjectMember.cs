@@ -9,7 +9,7 @@ using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
-    public class ProjectAdministrator
+    public class ProjectMember
     {
         [Required]
         [Index("IX_Id", IsUnique = true, IsClustered = false)]
@@ -39,8 +39,6 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public string CreatedBy { get; set; }
 
         [Required]
-        public Enumerations.RecordStatus PostStatus { get; set; }
-
-
+        public Enumerations.RecordStatus PostStatus { get; set; }        
     }
 }
