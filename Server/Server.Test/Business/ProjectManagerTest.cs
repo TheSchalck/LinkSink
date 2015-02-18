@@ -3,7 +3,7 @@
 namespace Server.Test.Business
 {
     [TestClass]
-    public class UnitTest1
+    public class ProjectManagerTest
     {
         [TestMethod]
         public void TestMethod1()
