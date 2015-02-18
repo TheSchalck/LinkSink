@@ -56,6 +56,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
                 .WithRequired(x => x.ProjectMember)
                 .HasForeignKey(x => x.ProjectMemberId);
 
+            // TODO -- should this be included?
             //modelBuilder.Entity<ProjectMemberRole>()
             //    .HasRequired(x => x.ProjectMember)
             //    .WithMany()
@@ -67,6 +68,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
                 .WithRequired(x => x.ProjectRole)
                 .HasForeignKey(x => x.ProjectRoleId);
 
+            // TODO -- should this be included?
             //modelBuilder.Entity<ProjectMemberRole>()
             //    .HasRequired(x => x.ProjectRole)
             //    .WithMany()

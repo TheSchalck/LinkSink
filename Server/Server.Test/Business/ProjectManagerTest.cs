@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Dk.Schalck.LinkSink.Server.Entity;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Server.Test.Business
 {
@@ -6,8 +8,17 @@ namespace Server.Test.Business
     public class ProjectManagerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProjectNoName()
+        {
+            var ctx = new LinkSinkDatabaseContext();
+        }
+
+
+        [TestMethod]
+        public void GetProject()
         {
         }
+
     }
 }

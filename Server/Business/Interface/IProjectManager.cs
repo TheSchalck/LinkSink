@@ -11,13 +11,15 @@ namespace Dk.Schalck.LinkSink.Server.Business.Interface
 {
     public interface IProjectManager
     {
-        void AddProject(Project project );
+        Project AddProject(string name, string displayName, string description, DateTime createDate, string createdBy);
 
         bool DeleteProject(Project project);
 
         void UpdateProject(Project project);
 
         List<Project> GetProjectListForUser(User user);
+
+        Project GetProject(Guid projectId);
 
 
     }
