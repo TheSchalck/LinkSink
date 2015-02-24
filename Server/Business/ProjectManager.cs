@@ -26,16 +26,16 @@ namespace Dk.Schalck.LinkSink.Server.Business
         public Project AddProject(string name, string displayName, string description, DateTime createDate, string createdBy)
         {
             // Ensure valid data
-            EnsureValidData(name, displayName, description, createDate, createdBy);
+            EnsureValidData(name, displayName, createDate, createdBy);
 
-            Guid Id = Guid.NewGuid();
+            Guid id = Guid.NewGuid();
             var p = new Project
             {
                 CreateDate = createDate,
                 CreatedBy = createdBy,
                 Description = description,
                 DisplayName = displayName,
-                Id = Id,
+                Id = id,
                 Name = name,
                 PostStatus = Enumerations.RecordStatus.Active
             };
@@ -46,7 +46,7 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return p;
         }
 
-        private void EnsureValidData(string name, string displayName, string description, DateTime createDate, string createdBy)
+        private void EnsureValidData(string name, string displayName, DateTime createDate, string createdBy)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(name);

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dk.Schalck.LinkSink.Server.Common.Interface
 {
-    interface IDatabaseContextFactory
+    public interface IDatabaseContextFactory
     {
+
     }
 }

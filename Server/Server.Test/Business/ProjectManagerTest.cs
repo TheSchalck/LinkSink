@@ -1,17 +1,70 @@
 ﻿using System;
+using System.Linq;
+using Dk.Schalck.LinkSink.Server.Business;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Server.Test.Business
 {
     [TestClass]
-    public class ProjectManagerTest
+    public class ProjectManagerTest : BaseTest
     {
+        private ProjectManager GetProjectManagerInstance()
+        {
+            var ctx = new LinkSinkDatabaseContext();
+            var pm = new ProjectManager(ctx);
+            return pm;
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+        }
+
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            base.CleanProjects();
+
+        }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddProjectNoName()
         {
+            var pm = GetProjectManagerInstance();
+            pm.AddProject("", "displayname", "description", DateTime.Now, "sts");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProjectNoDisplayName()
+        {
+            var pm = GetProjectManagerInstance();
+            pm.AddProject("name", "", "description", DateTime.Now, "sts");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProjectNoCreatedBy()
+        {
+            var pm = GetProjectManagerInstance();
+            pm.AddProject("name", "DisplayName", "description", DateTime.Now, "");
+        }
+
+        [TestMethod]
+        public void AddProject()
+        {
+            var pm = GetProjectManagerInstance();
+            var project = pm.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
+
             var ctx = new LinkSinkDatabaseContext();
+            var p = ctx.Projects.SingleOrDefault(x => x.Id == project.Id);
+            Assert.IsNotNull(p);
+            Assert.IsTrue(p.Name == project.Name);
+
         }
 
 

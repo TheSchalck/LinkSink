@@ -20,7 +20,7 @@ namespace Dk.Schalck.LinkSink.Automation.Management.Database
         private const string DatabaseIntegratedConnstr =
             @"data source={0};initial catalog={1};integrated security=True;MultipleActiveResultSets=True;App=KuAppCmdlets";
 
-        public BaseDatabaseCmdlet(string connectionStringName)
+        protected BaseDatabaseCmdlet(string connectionStringName)
         {
             _connectionStringName = connectionStringName;
         }
