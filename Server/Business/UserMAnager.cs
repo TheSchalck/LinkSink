@@ -1,7 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Dk.Schalck.LinkSink.Server.Business.Interface;
 using Dk.Schalck.LinkSink.Server.Common;
+using Dk.Schalck.LinkSink.Server.Common.Exception;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Dk.Schalck.LinkSink.Server.Entity.Context;
 
@@ -16,6 +17,11 @@ namespace Dk.Schalck.LinkSink.Server.Business
         public User AddUser(string username, string name, string displayName, string email, DateTime createDate, string createdBy)
         {
             EnsureValidData(username, name, ref displayName, email, createdBy);
+
+            // Check if user exists on email
+            var existUser = GetUser(email);
+            if (existUser != null)
+                throw new UserExistsException(string.Format("User with email <{0}> already exists", email));
 
             Guid id = Guid.NewGuid();
             var user = new User
@@ -33,7 +39,6 @@ namespace Dk.Schalck.LinkSink.Server.Business
             ctx.Add(user);
             ctx.SaveChanges();
             return (user);
-
         }
 
         public bool DeleteUser(User user)
@@ -44,6 +49,18 @@ namespace Dk.Schalck.LinkSink.Server.Business
         public void UpdateUser(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public User GetUser(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetUser(string email)
+        {
+            var ctx = Factory.GetContext();
+            var user = ctx.Users.SingleOrDefault(x => x.Email == email);
+            return user;
         }
 
         private void EnsureValidData(string username, string name, ref string displayName, string email, string createdBy)

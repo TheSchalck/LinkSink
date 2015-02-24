@@ -11,5 +11,10 @@ namespace Dk.Schalck.LinkSink.Server.Business.Interface
         bool DeleteUser(User user);
 
         void UpdateUser(User user);
+
+        User GetUser(Guid id);
+
+        User GetUser(string email);
+
     }
 }

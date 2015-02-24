@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Dk.Schalck.LinkSink.Server.Business;
+using Dk.Schalck.LinkSink.Server.Common.Exception;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Dk.Schalck.LinkSink.Server.Entity.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -72,14 +73,26 @@ namespace Server.Test.Business
         [TestMethod]
         public void AddUser()
         {
+            var email = Guid.NewGuid().ToString();
             var pm = _userGenerator.GetUserManagerInstance();
-            var user=  pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", "email", DateTime.Now, "sts");
+            var user=  pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", email, DateTime.Now, "sts");
 
             var ctx = ContextFactory.GetContext();
             var p = ctx.Users.SingleOrDefault(x => x.Id == user.Id);
             Assert.IsNotNull(p);
-            Assert.IsTrue(p.Name == user.Name);
+            Assert.IsTrue(p.Email == user.Email);
 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserExistsException))]
+        public void AddUserWithSameUserName()
+        {
+            var pm = _userGenerator.GetUserManagerInstance();
+            var user = pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", "email", DateTime.Now, "sts");
+            
+            // throws...
+            var user2 = pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", "email", DateTime.Now, "sts");
         }
 
 

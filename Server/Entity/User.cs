@@ -14,23 +14,28 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public Guid Id { get; set; }
 
         [Required]
-        [Index(IsUnique = true, IsClustered = true)]
         [StringLength(128)]
+        [Index(IsUnique = false, IsClustered = false)]
         public string UserName { get; set; }
 
         [Required]
+        [StringLength(128)]
         public string Name { get; set; }
         
         [Required]
+        [StringLength(128)]
         public string DisplayName { get; set; }
 
         [Required]
+        [Index(IsUnique = true)]
+        [StringLength(256)]
         public string Email { get; set; }
 
         [Required]
         public DateTime CreateDate { get; set; }
 
         [Required]
+        [StringLength(128)]
         public string CreatedBy { get; set; }
 
         [Required]
