@@ -14,9 +14,9 @@ namespace Dk.Schalck.LinkSink.Server.Business
         {
         }
 
-        public User AddUser(string username, string name, string displayName, string email, DateTime createDate, string createdBy)
+        public User AddUser(string username, string name, string description, string email, DateTime createDate, string createdBy)
         {
-            EnsureValidData(username, name, ref displayName, email, createdBy);
+            EnsureValidData(username, name, email, createdBy);
 
             // Check if user exists on email
             var existUser = GetUser(email);
@@ -28,7 +28,7 @@ namespace Dk.Schalck.LinkSink.Server.Business
             {
                 CreateDate = DateTime.Now,
                 CreatedBy = createdBy,
-                DisplayName = displayName,
+                Description = description,
                 Email = email,
                 Id = id,
                 Name = name,
@@ -53,7 +53,9 @@ namespace Dk.Schalck.LinkSink.Server.Business
 
         public User GetUser(Guid id)
         {
-            throw new NotImplementedException();
+            var ctx = Factory.GetContext();
+            var user = ctx.Users.SingleOrDefault(x => x.Id == id);
+            return user;
         }
 
         public User GetUser(string email)
@@ -63,7 +65,7 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return user;
         }
 
-        private void EnsureValidData(string username, string name, ref string displayName, string email, string createdBy)
+        private void EnsureValidData(string username, string name, string email, string createdBy)
         {
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentException(username);
@@ -73,10 +75,7 @@ namespace Dk.Schalck.LinkSink.Server.Business
             
             if (string.IsNullOrEmpty(email))
                 throw new ArgumentException(email);
-            
-            if (string.IsNullOrEmpty(displayName))
-                displayName = username;
-            
+                        
             if (string.IsNullOrEmpty(createdBy))
                 throw new ArgumentException(createdBy);
             

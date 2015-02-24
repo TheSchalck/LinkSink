@@ -24,7 +24,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         
         [Required]
         [StringLength(128)]
-        public string DisplayName { get; set; }
+        public string Description { get; set; }
 
         [Required]
         [Index(IsUnique = true)]

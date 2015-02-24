@@ -45,15 +45,6 @@ namespace Server.Test.Business
         }
 
         [TestMethod]
-        public void AddUserNoDisplayName()
-        {
-            var pm = _userGenerator.GetUserManagerInstance();
-            string username = Guid.NewGuid().ToString();
-            var user = pm.AddUser(username, "name", "", "email", DateTime.Now, "sts");
-            Assert.IsTrue(user.DisplayName == username);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddUserNoEmail()
         {
@@ -99,7 +90,7 @@ namespace Server.Test.Business
         //[TestMethod]
         //public void GetProject()
         //{
-        //    var project = _projectGenerator.AddUser(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
+        //    var project = _projectGenerator.AddUser(Guid.NewGuid().ToString(), "Description", "description", DateTime.Now, "sts");
 
         //    var pm = _projectGenerator.GetProjectManagerInstance();
         //    var p = pm.GetProject(project.Id);

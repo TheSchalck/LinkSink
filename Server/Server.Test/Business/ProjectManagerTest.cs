@@ -49,14 +49,14 @@ namespace Server.Test.Business
         public void AddProjectNoCreatedBy()
         {
             var pm = _projectGenerator.GetProjectManagerInstance();
-            pm.AddProject("name", "DisplayName", "description", DateTime.Now, "");
+            pm.AddProject("name", "Description", "description", DateTime.Now, "");
         }
 
         [TestMethod]
         public void AddProject()
         {
             var pm = _projectGenerator.GetProjectManagerInstance();
-            var project = pm.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
+            var project = pm.AddProject(Guid.NewGuid().ToString(), "Description", "description", DateTime.Now, "sts");
 
             var ctx = ContextFactory.GetContext();
             var p = ctx.Projects.SingleOrDefault(x => x.Id == project.Id);
@@ -69,7 +69,7 @@ namespace Server.Test.Business
         [TestMethod]
         public void GetProject()
         {
-            var project = _projectGenerator.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
+            var project = _projectGenerator.AddProject(Guid.NewGuid().ToString(), "Description", "description", DateTime.Now, "sts");
 
             var pm = _projectGenerator.GetProjectManagerInstance();
             var p = pm.GetProject(project.Id);
