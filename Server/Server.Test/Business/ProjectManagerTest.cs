@@ -3,22 +3,19 @@ using System.Linq;
 using Dk.Schalck.LinkSink.Server.Business;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Server.Test.Generators;
 
 namespace Server.Test.Business
 {
     [TestClass]
     public class ProjectManagerTest : BaseTest
     {
-        private ProjectManager GetProjectManagerInstance()
-        {
-            var ctx = new LinkSinkDatabaseContext();
-            var pm = new ProjectManager(ctx);
-            return pm;
-        }
+        private ProjectGenerator _projectGenerator;
 
         [TestInitialize]
         public void Initialize()
         {
+            _projectGenerator = new ProjectGenerator();
         }
 
 
@@ -33,7 +30,7 @@ namespace Server.Test.Business
         [ExpectedException(typeof(ArgumentException))]
         public void AddProjectNoName()
         {
-            var pm = GetProjectManagerInstance();
+            var pm = _projectGenerator.GetProjectManagerInstance();
             pm.AddProject("", "displayname", "description", DateTime.Now, "sts");
         }
 
@@ -41,7 +38,7 @@ namespace Server.Test.Business
         [ExpectedException(typeof(ArgumentException))]
         public void AddProjectNoDisplayName()
         {
-            var pm = GetProjectManagerInstance();
+            var pm = _projectGenerator.GetProjectManagerInstance();
             pm.AddProject("name", "", "description", DateTime.Now, "sts");
         }
 
@@ -50,14 +47,14 @@ namespace Server.Test.Business
         [ExpectedException(typeof(ArgumentException))]
         public void AddProjectNoCreatedBy()
         {
-            var pm = GetProjectManagerInstance();
+            var pm = _projectGenerator.GetProjectManagerInstance();
             pm.AddProject("name", "DisplayName", "description", DateTime.Now, "");
         }
 
         [TestMethod]
         public void AddProject()
         {
-            var pm = GetProjectManagerInstance();
+            var pm = _projectGenerator.GetProjectManagerInstance();
             var project = pm.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
 
             var ctx = new LinkSinkDatabaseContext();
@@ -71,7 +68,23 @@ namespace Server.Test.Business
         [TestMethod]
         public void GetProject()
         {
+            var project = _projectGenerator.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
+
+            var pm = _projectGenerator.GetProjectManagerInstance();
+            var p = pm.GetProject(project.Id);
+
+            Assert.IsNotNull(p);
+            Assert.IsTrue(p.Name == project.Name);
         }
+
+        [TestMethod]
+        public void GetProjectDoesNotExist()
+        {
+            var pm = _projectGenerator.GetProjectManagerInstance();
+            var p = pm.GetProject(Guid.NewGuid());
+            Assert.IsNull(p);
+        }
+
 
     }
 }
