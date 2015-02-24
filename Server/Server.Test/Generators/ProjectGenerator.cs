@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dk.Schalck.LinkSink.Server.Business;
+using Dk.Schalck.LinkSink.Server.Business.Interface;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Dk.Schalck.LinkSink.Server.Entity.Context;
 
@@ -11,10 +12,9 @@ namespace Server.Test.Generators
 {
     public class ProjectGenerator : BaseGenerator
     {
-        public ProjectManager GetProjectManagerInstance()
+        public IProjectManager GetProjectManagerInstance()
         {
-            var ctx = ContextFactory.GetContext();
-            var pm = new ProjectManager(ctx);
+            var pm = new ProjectManager(ContextFactory);
             return pm;
         }
 

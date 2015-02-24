@@ -58,7 +58,7 @@ namespace Server.Test.Business
             var pm = _projectGenerator.GetProjectManagerInstance();
             var project = pm.AddProject(Guid.NewGuid().ToString(), "DisplayName", "description", DateTime.Now, "sts");
 
-            var ctx = new LinkSinkDatabaseContext();
+            var ctx = ContextFactory.GetContext();
             var p = ctx.Projects.SingleOrDefault(x => x.Id == project.Id);
             Assert.IsNotNull(p);
             Assert.IsTrue(p.Name == project.Name);
