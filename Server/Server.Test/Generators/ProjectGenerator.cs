@@ -24,5 +24,20 @@ namespace Server.Test.Generators
             var result =  p.AddProject(name, displayname, description, createDate, createdBy);
             return result;
         }
+
+        public Project AddProject()
+        {
+            var p = GetProjectManagerInstance();
+            var result = p.AddProject(Guid.NewGuid().ToString(), "displayname", "description", DateTime.Now, "sts");
+            return result;
+        }
+
+        public ProjectMember AddProjectMember(Project project, User user)
+        {
+            var p = GetProjectManagerInstance();
+            var result = p.AddProjectMember(project, user, DateTime.Now, "sts");
+            return result;
+        }
+
     }
 }

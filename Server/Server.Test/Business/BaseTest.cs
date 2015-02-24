@@ -44,10 +44,22 @@ namespace Server.Test.Business
             ctx.SaveChanges();
         }
 
+        protected void CleanProjectMembers()
+        {
+            var ctx = ContextFactory.GetContext();
+            var list = ctx.ProjectMembers;
+            foreach (var user in list)
+            {
+                list.Remove(user);
+            }
+            ctx.SaveChanges();
+        }
+
         protected void CleanDatabase()
         {
             // Call the clean method in correct order
 
+            CleanProjectMembers();
             CleanProjects();
             CleanUsers();
             ;

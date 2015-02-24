@@ -44,6 +44,9 @@ namespace Dk.Schalck.LinkSink.Server.Business
         public void DeleteUser(User user)
         {
             var toBeDelete = GetUser(user.Id);
+            if (toBeDelete == null)
+                return;
+
             var ctx = Factory.GetContext();
             ctx.Users.Attach(toBeDelete);
             ctx.Users.Remove(toBeDelete);
@@ -90,7 +93,5 @@ namespace Dk.Schalck.LinkSink.Server.Business
                 throw new ArgumentException(createdBy);
             
         }
-
     }
-
 }

@@ -16,6 +16,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public Guid Id { get; set; }
 
         [Required]
+        [Index("IX_ProjectId", IsUnique = false, IsClustered = true)]
         public Guid ProjectId { get; set; }
 
         public Project Project { get; set; }
@@ -37,9 +38,6 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [StringLength(128)]
         [Required]
         public string CreatedBy { get; set; }
-
-        [Required]
-        public Enumerations.RecordStatus PostStatus { get; set; }
 
         public virtual ICollection<ProjectMemberRole> ProjectMemberRoles { get; set; }
     }

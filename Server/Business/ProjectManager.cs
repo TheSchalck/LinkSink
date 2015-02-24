@@ -14,7 +14,8 @@ namespace Dk.Schalck.LinkSink.Server.Business
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public ProjectManager(IDatabaseContextFactory factory) : base(factory)
+        public ProjectManager(IDatabaseContextFactory factory)
+            : base(factory)
         {
         }
 
@@ -52,17 +53,72 @@ namespace Dk.Schalck.LinkSink.Server.Business
                 throw new ArgumentException(createdBy);
             if (createDate == null)
                 throw new ArgumentException(createDate.ToString());
-            
+
         }
 
         public Project GetProject(Guid projectId)
         {
             var context = Factory.GetContext();
             var p = context.Projects
-                .Include(x=>x.ProjectMembers)
+                .Include(x => x.ProjectMembers)
                 .SingleOrDefault(x => x.Id == projectId);
             return p;
         }
+
+        public ProjectMember AddProjectMember(Project project, User user, DateTime createDate, string createdBy)
+        {
+            var pm = new ProjectMember
+            {
+                Id = Guid.NewGuid(),
+                Project = project,
+                User = user,
+                CreateDate = createDate,
+                CreatedBy = createdBy
+            };
+            var ctx = Factory.GetContext();
+            ctx.Projects.Attach(project);
+            ctx.Users.Attach(user);
+            var result = ctx.ProjectMembers.Add(pm);
+            ctx.SaveChanges();
+            return result;
+        }
+
+        public List<ProjectMember> AddProjectMembers(Project project, List<User> users, DateTime createDate, string createdBy)
+        {
+            var list = new List<ProjectMember>();
+
+            var ctx = Factory.GetContext();
+            ctx.Projects.Attach(project);
+
+            foreach (var user in users)
+            {
+                var pm = new ProjectMember
+                {
+                    Id = Guid.NewGuid(),
+                    Project = project,
+                    User = user,
+                    CreateDate = createDate,
+                    CreatedBy = createdBy
+                };
+                ctx.Users.Attach(user);
+                list.Add(ctx.ProjectMembers.Add(pm));
+            }
+
+            ctx.SaveChanges();
+            return list;
+        }
+
+        public void RemoveProjectMember(Project project, User user)
+        {
+            var ctx = Factory.GetContext();
+            var pm = ctx.ProjectMembers.SingleOrDefault(x => x.ProjectId == project.Id && x.UserId == user.Id);
+            if (pm == null)
+                return;
+
+            ctx.ProjectMembers.Remove(pm);
+            ctx.SaveChanges();
+        }
+
 
         public bool DeleteProject(Project project)
         {
@@ -78,6 +134,8 @@ namespace Dk.Schalck.LinkSink.Server.Business
         {
             throw new NotImplementedException();
         }
+
+
 
     }
 }
