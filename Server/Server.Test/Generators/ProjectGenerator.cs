@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Dk.Schalck.LinkSink.Server.Business;
 using Dk.Schalck.LinkSink.Server.Entity;
+using Dk.Schalck.LinkSink.Server.Entity.Context;
 
 namespace Server.Test.Generators
 {
-    public class ProjectGenerator
+    public class ProjectGenerator : BaseGenerator
     {
         public ProjectManager GetProjectManagerInstance()
         {
-            var ctx = new LinkSinkDatabaseContext();
+            var ctx = ContextFactory.GetContext();
             var pm = new ProjectManager(ctx);
             return pm;
         }

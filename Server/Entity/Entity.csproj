@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILinkSinkDatabaseContext.cs" />
-    <Compile Include="LinkSinkDatabaseContext.cs" />
+    <Compile Include="Context\DatabaseContextFactory.cs" />
+    <Compile Include="Context\IDatabaseContextFactory.cs" />
+    <Compile Include="Context\ILinkSinkDatabaseContext.cs" />
+    <Compile Include="Context\LinkSinkDatabaseContext.cs" />
     <Compile Include="Migrations\CustomMigrationSqlGenerator.cs" />
     <Compile Include="Migrations\LinkSinkDatabaseMigrationConfiguration.cs" />
     <Compile Include="Project.cs" />

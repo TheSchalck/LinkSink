@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Management.Automation;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
-using Dk.Schalck.LinkSink.Server.Entity;
+using Dk.Schalck.LinkSink.Server.Entity.Context;
 using Dk.Schalck.LinkSink.Server.Entity.Migrations;
 
 namespace Dk.Schalck.LinkSink.Automation.Management.Database

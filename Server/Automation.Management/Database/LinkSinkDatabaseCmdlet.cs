@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dk.Schalck.LinkSink.Automation.Management.Database;
-using Dk.Schalck.LinkSink.Server.Entity;
+﻿using Dk.Schalck.LinkSink.Server.Entity.Context;
 
 namespace Dk.Schalck.LinkSink.Automation.Management.Database
 {

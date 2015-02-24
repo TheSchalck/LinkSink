@@ -4,14 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dk.Schalck.LinkSink.Server.Entity;
+using Dk.Schalck.LinkSink.Server.Entity.Context;
 
 namespace Server.Test.Business
 {
-    public class BaseTest
+    public abstract class BaseTest
     {
+        private IDatabaseContextFactory _factory;
+
+        public IDatabaseContextFactory ContextFactory
+        {
+            get
+            {
+                if (_factory == null)
+                    _factory = new DatabaseContextFactory();
+                return _factory;
+            }
+        }
+
         protected void CleanProjects()
         {
-            var ctx = new LinkSinkDatabaseContext();
+            var ctx = ContextFactory.GetContext();
             var list = ctx.Projects;
             foreach (var project in list)
             {
