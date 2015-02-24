@@ -20,5 +20,11 @@ namespace Server.Test.Generators
             var result =  p.AddUser(username, name, displayname, email, createDate, createdBy);
             return result;
         }
+        public User AddUser()
+        {
+            var p = GetUserManagerInstance();
+            var result =  p.AddUser(Guid.NewGuid().ToString(), "name", "description", Guid.NewGuid().ToString(), DateTime.Now, "sts");
+            return result;
+        }
     }
 }

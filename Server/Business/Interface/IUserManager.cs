@@ -6,15 +6,17 @@ namespace Dk.Schalck.LinkSink.Server.Business.Interface
 {
     public interface IUserManager
     {
-        User AddUser(string username, string name, string displayName, string email, DateTime createDate, string createdBy);
+        User AddUser(string username, string name, string description, string email, DateTime createDate, string createdBy);
 
-        bool DeleteUser(User user);
+        void DeleteUser(User user);
 
         void UpdateUser(User user);
 
         User GetUser(Guid id);
 
         User GetUser(string email);
+
+        bool ExistsUser(string email);
 
     }
 }

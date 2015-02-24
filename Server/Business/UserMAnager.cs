@@ -41,9 +41,13 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return (user);
         }
 
-        public bool DeleteUser(User user)
+        public void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            var toBeDelete = GetUser(user.Id);
+            var ctx = Factory.GetContext();
+            ctx.Users.Attach(toBeDelete);
+            ctx.Users.Remove(toBeDelete);
+            ctx.SaveChanges();
         }
 
         public void UpdateUser(User user)
@@ -63,6 +67,12 @@ namespace Dk.Schalck.LinkSink.Server.Business
             var ctx = Factory.GetContext();
             var user = ctx.Users.SingleOrDefault(x => x.Email == email);
             return user;
+        }
+
+        public bool ExistsUser(string email)
+        {
+            var user = GetUser(email);
+            return user != null;
         }
 
         private void EnsureValidData(string username, string name, string email, string createdBy)

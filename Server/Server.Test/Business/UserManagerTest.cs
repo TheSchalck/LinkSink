@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Dk.Schalck.LinkSink.Server.Business;
 using Dk.Schalck.LinkSink.Server.Common.Exception;
-using Dk.Schalck.LinkSink.Server.Entity;
-using Dk.Schalck.LinkSink.Server.Entity.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.Test.Generators;
 
@@ -76,15 +73,33 @@ namespace Server.Test.Business
         }
 
         [TestMethod]
+        public void DeleteUser()
+        {
+            var user =  _userGenerator.AddUser();
+            var um = _userGenerator.GetUserManagerInstance();
+            var fetched = um.GetUser(user.Id);
+            Assert.IsTrue(fetched.UserName == user.UserName);
+
+            var um2 = _userGenerator.GetUserManagerInstance();
+            um2.DeleteUser(user);
+            var fetched2 = um.GetUser(fetched.Id);
+            Assert.IsNull(fetched2);
+
+
+        }
+
+
+        [TestMethod]
         [ExpectedException(typeof(UserExistsException))]
         public void AddUserWithSameUserName()
         {
             var pm = _userGenerator.GetUserManagerInstance();
             var user = pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", "email", DateTime.Now, "sts");
-            
+
             // throws...
             var user2 = pm.AddUser(Guid.NewGuid().ToString(), "name", "displayname", "email", DateTime.Now, "sts");
         }
+
 
 
         //[TestMethod]
