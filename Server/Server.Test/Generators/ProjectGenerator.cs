@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dk.Schalck.LinkSink.Server.Business;
 using Dk.Schalck.LinkSink.Server.Business.Interface;
+using Dk.Schalck.LinkSink.Server.Common;
 using Dk.Schalck.LinkSink.Server.Entity;
 using Dk.Schalck.LinkSink.Server.Entity.Context;
 
@@ -38,6 +40,15 @@ namespace Server.Test.Generators
             var result = p.AddProjectMember(project, user, DateTime.Now, "sts");
             return result;
         }
+
+        public ProjectMemberRole AddProjectMemberRole(ProjectMember member, Enumerations.ProjectRoleEnum projectRole)
+        {
+            var p = GetProjectManagerInstance();
+            var ctx = ContextFactory.GetContext();
+            var result = p.AddProjectMemberRole(member, projectRole, DateTime.Now, "sts");
+            return result;
+        }
+
 
     }
 }

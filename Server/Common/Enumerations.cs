@@ -8,5 +8,13 @@
             InActive = 20,
             Deleted = 99
         }
+
+        public enum ProjectRoleEnum
+        {
+            ProjectAdministrator = 10,
+            SiteAdministrator = 20,
+            ProjectReader = 30,
+            ProjectContributor = 40
+        }
     }
 }

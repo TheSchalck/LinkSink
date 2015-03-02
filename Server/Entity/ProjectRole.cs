@@ -11,7 +11,8 @@ namespace Dk.Schalck.LinkSink.Server.Entity
     {
         [Required]
         [Index(IsUnique = true, IsClustered = false)]
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         [Required]
         [Index(IsUnique = true, IsClustered = true)]

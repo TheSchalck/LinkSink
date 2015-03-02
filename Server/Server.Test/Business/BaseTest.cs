@@ -55,10 +55,23 @@ namespace Server.Test.Business
             ctx.SaveChanges();
         }
 
+        protected void CleanProjectMemberRoles()
+        {
+            var ctx = ContextFactory.GetContext();
+            var list = ctx.ProjectMemberRoles;
+            foreach (var memberRoles in list)
+            {
+                list.Remove(memberRoles);
+            }
+            ctx.SaveChanges();
+            
+        }
+
         protected void CleanDatabase()
         {
             // Call the clean method in correct order
 
+            CleanProjectMemberRoles();
             CleanProjectMembers();
             CleanProjects();
             CleanUsers();

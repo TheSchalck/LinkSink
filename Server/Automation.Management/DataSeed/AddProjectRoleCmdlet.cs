@@ -14,7 +14,7 @@ namespace Dk.Schalck.LinkSink.Automation.Management.DataSeed
     {
 
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         public string Name { get; set; }

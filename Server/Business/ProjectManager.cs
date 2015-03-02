@@ -19,10 +19,13 @@ namespace Dk.Schalck.LinkSink.Server.Business
         {
         }
 
-        public Project AddProject(string name, string displayName, string description, DateTime createDate, string createdBy)
+        #region Project methods
+
+        public Project AddProject(string name, string displayName, string description, DateTime createDate,
+            string createdBy)
         {
             // Ensure valid data
-            EnsureValidData(name, displayName, createDate, createdBy);
+            EnsureValidProjectData(name, displayName, createDate, createdBy);
 
             Guid id = Guid.NewGuid();
             var p = new Project
@@ -43,7 +46,7 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return p;
         }
 
-        private void EnsureValidData(string name, string displayName, DateTime createDate, string createdBy)
+        private void EnsureValidProjectData(string name, string displayName, DateTime createDate, string createdBy)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(name);
@@ -65,8 +68,31 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return p;
         }
 
+        public bool DeleteProject(Project project)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProject(Project project)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+
+        #region ProjectMember methods
+
         public ProjectMember AddProjectMember(Project project, User user, DateTime createDate, string createdBy)
         {
+
+            var ctx = Factory.GetContext();
+
+            var exists =
+                ctx.ProjectMembers.SingleOrDefault(member => member.ProjectId == project.Id && member.UserId == user.Id);
+            if (exists != null)
+                return exists;
+
             var pm = new ProjectMember
             {
                 Id = Guid.NewGuid(),
@@ -75,7 +101,6 @@ namespace Dk.Schalck.LinkSink.Server.Business
                 CreateDate = createDate,
                 CreatedBy = createdBy
             };
-            var ctx = Factory.GetContext();
             ctx.Projects.Attach(project);
             ctx.Users.Attach(user);
             var result = ctx.ProjectMembers.Add(pm);
@@ -83,25 +108,36 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return result;
         }
 
-        public List<ProjectMember> AddProjectMembers(Project project, List<User> users, DateTime createDate, string createdBy)
+        public List<ProjectMember> AddProjectMembers(Project project, List<User> users, DateTime createDate,
+            string createdBy)
         {
             var list = new List<ProjectMember>();
 
             var ctx = Factory.GetContext();
             ctx.Projects.Attach(project);
 
+            var existingMembers = ctx.ProjectMembers.Where(x => x.ProjectId == project.Id).ToList();
+
+
             foreach (var user in users)
             {
-                var pm = new ProjectMember
+                if (existingMembers.Any(x => x.UserId == user.Id))
                 {
-                    Id = Guid.NewGuid(),
-                    Project = project,
-                    User = user,
-                    CreateDate = createDate,
-                    CreatedBy = createdBy
-                };
-                ctx.Users.Attach(user);
-                list.Add(ctx.ProjectMembers.Add(pm));
+                    list.Add(existingMembers.Single(x => x.UserId == user.Id));
+                }
+                else
+                {
+                    var pm = new ProjectMember
+                    {
+                        Id = Guid.NewGuid(),
+                        Project = project,
+                        User = user,
+                        CreateDate = createDate,
+                        CreatedBy = createdBy
+                    };
+                    ctx.Users.Attach(user);
+                    list.Add(ctx.ProjectMembers.Add(pm));
+                }
             }
 
             ctx.SaveChanges();
@@ -119,16 +155,103 @@ namespace Dk.Schalck.LinkSink.Server.Business
             ctx.SaveChanges();
         }
 
-
-        public bool DeleteProject(Project project)
+        public void RemoveProjectMember(ProjectMember projectMember)
         {
-            throw new NotImplementedException();
+            var ctx = Factory.GetContext();
+            var pm = ctx.ProjectMembers.Attach(projectMember);
+            ctx.ProjectMembers.Remove(pm);
+            ctx.SaveChanges();
         }
 
-        public void UpdateProject(Project project)
+        #endregion
+
+
+        #region ProjectMemberRoles
+
+        public ProjectMemberRole AddProjectMemberRole(ProjectMember projectMember, Enumerations.ProjectRoleEnum projectRole,
+            DateTime createDate, string createdBy)
         {
-            throw new NotImplementedException();
+
+            var ctx = Factory.GetContext();
+
+            var exists =
+                ctx.ProjectMemberRoles.SingleOrDefault(
+                    role => role.ProjectMemberId == projectMember.Id && role.ProjectRoleId == (int)projectRole);
+            if (exists != null)
+                return (exists);
+
+            var pm = new ProjectMemberRole
+            {
+                Id = Guid.NewGuid(),
+                ProjectMemberId = projectMember.Id,
+                ProjectRoleId = (int)projectRole,
+                CreateDate = createDate,
+                CreatedBy = createdBy
+            };
+
+            var result = ctx.ProjectMemberRoles.Add(pm);
+            ctx.SaveChanges();
+            return result;
+
         }
+
+        public void RemoveProjectMemberRole(ProjectMember projectMember, Enumerations.ProjectRoleEnum projectRole)
+        {
+            var ctx = Factory.GetContext();
+            var pm =
+                ctx.ProjectMemberRoles.SingleOrDefault(
+                    x => x.ProjectMemberId == projectMember.Id && x.ProjectRoleId == (int)projectRole);
+            if (pm == null)
+                return;
+
+            ctx.ProjectMemberRoles.Remove(pm);
+            ctx.SaveChanges();
+        }
+
+        public void RemoveProjectMemberRole(ProjectMemberRole projectMemberRole)
+        {
+            var ctx = Factory.GetContext();
+            var pm = ctx.ProjectMemberRoles.Attach(projectMemberRole);
+            ctx.ProjectMemberRoles.Remove(pm);
+            ctx.SaveChanges();
+        }
+
+        public List<ProjectMemberRole> AddProjectMemberRoles(ProjectMember projectMember, List<Enumerations.ProjectRoleEnum> projectRoles,
+            DateTime createDate, string createdBy)
+        {
+            var list = new List<ProjectMemberRole>();
+
+            var ctx = Factory.GetContext();
+
+            var existingMemberRoles = ctx.ProjectMemberRoles.Where(x => x.ProjectMemberId == projectMember.Id).ToList();
+
+            foreach (var role in projectRoles)
+            {
+                if (existingMemberRoles.Any(memberRole => memberRole.ProjectRoleId == (int)role))
+                {
+                    list.Add(existingMemberRoles.Single(memberRole => memberRole.ProjectRoleId == (int)role));
+                }
+                else
+                {
+                    var pm = new ProjectMemberRole
+                    {
+                        Id = Guid.NewGuid(),
+                        ProjectMemberId = projectMember.Id,
+                        ProjectRoleId = (int)role,
+                        CreateDate = createDate,
+                        CreatedBy = createdBy
+                    };
+                    list.Add(ctx.ProjectMemberRoles.Add(pm));
+
+                }
+            }
+            ctx.SaveChanges();
+            return list;
+        }
+
+        #endregion
+
+
 
         public List<Project> GetProjectListForUser(User user)
         {

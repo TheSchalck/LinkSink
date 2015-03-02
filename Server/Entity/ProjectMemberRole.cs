@@ -19,7 +19,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         public ProjectMember ProjectMember { get; set; }
 
         [Required]
-        public Guid ProjectRoleId { get; set; }
+        public int ProjectRoleId { get; set; }
 
         public ProjectRole ProjectRole { get; set; }
 
