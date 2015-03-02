@@ -5,7 +5,9 @@ Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "\Dk.Schalck.LinkSink.Au
 	Write-Host "Running all"
 
 
-	#MessageStore.Entity
+	#LinkSink.Entity
 	Write-Host "Updating LinkSink database"
 	Update-LinkSinkDatabase
+	Write-Host "Importing required data"
+	& (Join-Path -Path $PSScriptRoot -ChildPath "\SeedData-Basic.ps1") 
 

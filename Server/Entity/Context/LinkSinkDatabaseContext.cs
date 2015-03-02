@@ -7,7 +7,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
     public class LinkSinkDatabaseContext : DbContext, ILinkSinkDatabaseContext
     {
         public virtual IDbSet<User> Users { get { return Set<User>(); } }
-        public virtual IDbSet<ProjectRole> Roles { get { return Set<ProjectRole>(); } }
+        public virtual IDbSet<ProjectRole> ProjectRoles { get { return Set<ProjectRole>(); } }
         public virtual IDbSet<Project> Projects { get { return Set<Project>(); } }
         public virtual IDbSet<ProjectMember> ProjectMembers { get { return Set<ProjectMember>(); } }
         public virtual IDbSet<ProjectMemberRole> ProjectMemberRoles { get { return Set<ProjectMemberRole>(); } }

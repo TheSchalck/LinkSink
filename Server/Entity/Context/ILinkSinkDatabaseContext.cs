@@ -6,7 +6,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
     public interface ILinkSinkDatabaseContext
     {
         IDbSet<User> Users { get ; } 
-        IDbSet<ProjectRole> Roles { get; } 
+        IDbSet<ProjectRole> ProjectRoles { get; } 
         IDbSet<Project> Projects { get ; } 
         IDbSet<ProjectMember> ProjectMembers { get ; }
         IDbSet<ProjectMemberRole> ProjectMemberRoles { get ; }

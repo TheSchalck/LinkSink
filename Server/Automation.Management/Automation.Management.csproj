@@ -58,6 +58,8 @@
     <Compile Include="Database\UpdateLinkSinkDatabaseCmdlet.cs" />
     <Compile Include="Database\RemoveLinkSinkDatabaseCmdlet.cs" />
     <Compile Include="Database\NewLinkSinkDatabaseCmdlet.cs" />
+    <Compile Include="DataSeed\AddProjectRoleCmdlet.cs" />
+    <Compile Include="DataSeed\BaseContextCmdlet.cs" />
     <Compile Include="Extension\EntityExceptionExtensions.cs" />
     <Compile Include="Infrastructure\AppConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +67,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="SeedData-Basic.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="PostDeploy.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -73,6 +78,10 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6073BAEC-36A5-4D97-B756-178989F925DF}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{24FED4DB-0870-4F4A-A307-C279537D139E}</Project>
       <Name>Entity</Name>
