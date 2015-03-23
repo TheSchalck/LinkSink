@@ -41,5 +41,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity
 
         [Required]
         public Project Project { get; set; }
+
+        public virtual ICollection<LinkVisit> LinkVisits { get; set; } 
     }
 }

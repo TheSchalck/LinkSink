@@ -12,7 +12,8 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
         public virtual IDbSet<Project> Projects { get { return Set<Project>(); } }
         public virtual IDbSet<ProjectMember> ProjectMembers { get { return Set<ProjectMember>(); } }
         public virtual IDbSet<ProjectMemberRole> ProjectMemberRoles { get { return Set<ProjectMemberRole>(); } }
-        public virtual IDbSet<Link> Links { get; private set; }
+        public virtual IDbSet<Link> Links { get { return Set<Link>(); } }
+        public virtual IDbSet<LinkVisit> LinkVisits { get { return Set<LinkVisit>(); } }
 
 
         public LinkSinkDatabaseContext()
@@ -81,6 +82,20 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
                 .HasForeignKey(x => x.ProjectId);
 
             modelBuilder.Entity<Link>()
+                .HasRequired(x => x.CreatedByUser);
+
+            //modelBuilder.Entity<LinkVisit>()
+            //    .HasRequired(x => x.Link)
+            //    .WithMany(x => x.LinkVisits)
+            //    .HasForeignKey(x => x.LinkId);
+
+            modelBuilder.Entity<Link>()
+                .HasMany(x => x.LinkVisits)
+                .WithRequired(x => x.Link)
+                .HasForeignKey(x => x.LinkId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LinkVisit>()
                 .HasRequired(x => x.CreatedByUser);
 
         }

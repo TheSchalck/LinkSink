@@ -52,6 +52,7 @@
     <Compile Include="Context\IDatabaseContextFactory.cs" />
     <Compile Include="Context\ILinkSinkDatabaseContext.cs" />
     <Compile Include="Context\LinkSinkDatabaseContext.cs" />
+    <Compile Include="LinkVisit.cs" />
     <Compile Include="Migrations\CustomMigrationSqlGenerator.cs" />
     <Compile Include="Migrations\LinkSinkDatabaseMigrationConfiguration.cs" />
     <Compile Include="Link.cs" />
