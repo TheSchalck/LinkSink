@@ -58,8 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
+    <Compile Include="Interface\ILinkManager.cs" />
     <Compile Include="Interface\IUserManager.cs" />
     <Compile Include="Interface\IProjectManager.cs" />
+    <Compile Include="LinkManager.cs" />
     <Compile Include="ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />

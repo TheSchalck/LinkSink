@@ -78,6 +78,13 @@ namespace Dk.Schalck.LinkSink.Server.Business
             return user != null;
         }
 
+        public bool ExistsUser(Guid userId)
+        {
+            var ctx = Factory.GetContext();
+            return ctx.Users.Any(x => x.Id == userId);
+        }
+
+
         private void EnsureValidData(string username, string name, string email, string createdBy)
         {
             if (string.IsNullOrEmpty(username))

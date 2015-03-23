@@ -17,6 +17,7 @@ namespace Dk.Schalck.LinkSink.Server.Business.Interface
         User GetUser(string email);
 
         bool ExistsUser(string email);
+        bool ExistsUser(Guid userId);
 
     }
 }

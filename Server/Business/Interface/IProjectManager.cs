@@ -12,6 +12,8 @@ namespace Dk.Schalck.LinkSink.Server.Business.Interface
 {
     public interface IProjectManager
     {
+        bool ExistsProject(Guid projectId);
+
         Project AddProject(string name, string displayName, string description, DateTime createDate, string createdBy);
 
         bool DeleteProject(Project project);

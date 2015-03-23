@@ -67,15 +67,26 @@ namespace Server.Test.Business
             
         }
 
+        protected void CleanLinks()
+        {
+            var ctx = ContextFactory.GetContext();
+            var list = ctx.Links;
+            foreach (var link in list)
+            {
+                list.Remove(link);
+            }
+            ctx.SaveChanges();
+        }
+
         protected void CleanDatabase()
         {
             // Call the clean method in correct order
 
+            CleanLinks();
             CleanProjectMemberRoles();
             CleanProjectMembers();
             CleanProjects();
             CleanUsers();
-            ;
         }
     }
 }

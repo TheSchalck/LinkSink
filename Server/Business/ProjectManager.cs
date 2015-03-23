@@ -21,6 +21,13 @@ namespace Dk.Schalck.LinkSink.Server.Business
 
         #region Project methods
 
+        public bool ExistsProject(Guid projectId)
+        {
+            // TODO - missing Unit test
+            var ctx = Factory.GetContext();
+            return ctx.Projects.Any(x => x.Id == projectId);
+        }
+
         public Project AddProject(string name, string displayName, string description, DateTime createDate,
             string createdBy)
         {

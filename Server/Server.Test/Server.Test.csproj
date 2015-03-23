@@ -61,9 +61,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Business\BaseTest.cs" />
+    <Compile Include="Business\LinkManagerTest.cs" />
     <Compile Include="Business\UserManagerTest.cs" />
     <Compile Include="Business\ProjectManagerTest.cs" />
     <Compile Include="Generators\BaseGenerator.cs" />
+    <Compile Include="Generators\LinkGenerator.cs" />
     <Compile Include="Generators\UserGenerator.cs" />
     <Compile Include="Generators\ProjectGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
