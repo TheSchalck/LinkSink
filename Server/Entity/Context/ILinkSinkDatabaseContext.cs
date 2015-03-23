@@ -10,7 +10,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
         IDbSet<Project> Projects { get ; } 
         IDbSet<ProjectMember> ProjectMembers { get ; }
         IDbSet<ProjectMemberRole> ProjectMemberRoles { get ; }
-
+        IDbSet<Link> Links { get; }
 
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
         DbSet Set(Type entityType);

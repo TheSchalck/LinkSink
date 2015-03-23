@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dk.Schalck.LinkSink.Server.Entity.Context
 {
@@ -11,6 +12,7 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
         public virtual IDbSet<Project> Projects { get { return Set<Project>(); } }
         public virtual IDbSet<ProjectMember> ProjectMembers { get { return Set<ProjectMember>(); } }
         public virtual IDbSet<ProjectMemberRole> ProjectMemberRoles { get { return Set<ProjectMemberRole>(); } }
+        public virtual IDbSet<Link> Links { get; private set; }
 
 
         public LinkSinkDatabaseContext()
@@ -53,24 +55,33 @@ namespace Dk.Schalck.LinkSink.Server.Entity.Context
                 .WithRequired(x => x.ProjectMember)
                 .HasForeignKey(x => x.ProjectMemberId);
 
-            // TODO -- should this be included?
-            //modelBuilder.Entity<ProjectMemberRole>()
-            //    .HasRequired(x => x.ProjectMember)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.ProjectMemberId);
-
+            modelBuilder.Entity<ProjectMemberRole>()
+                .HasRequired(x => x.ProjectMember)
+                .WithMany()
+                .HasForeignKey(x => x.ProjectMemberId);
 
             modelBuilder.Entity<ProjectRole>()
                 .HasMany(x => x.ProjectMemberRoles)
                 .WithRequired(x => x.ProjectRole)
                 .HasForeignKey(x => x.ProjectRoleId);
 
-            // TODO -- should this be included?
-            //modelBuilder.Entity<ProjectMemberRole>()
-            //    .HasRequired(x => x.ProjectRole)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.ProjectRoleId);
+            modelBuilder.Entity<ProjectMemberRole>()
+                .HasRequired(x => x.ProjectRole)
+                .WithMany()
+                .HasForeignKey(x => x.ProjectRoleId);
 
+            modelBuilder.Entity<Project>()
+                .HasMany(x => x.Links)
+                .WithRequired(x => x.Project)
+                .HasForeignKey(x => x.ProjectId);
+
+            modelBuilder.Entity<Link>()
+                .HasRequired(x => x.Project)
+                .WithMany()
+                .HasForeignKey(x => x.ProjectId);
+
+            modelBuilder.Entity<Link>()
+                .HasRequired(x => x.CreatedByUser);
 
         }
     }

@@ -6,23 +6,22 @@ using Dk.Schalck.LinkSink.Server.Common;
 
 namespace Dk.Schalck.LinkSink.Server.Entity
 {
-    public class Project
+    public class Link
     {
         [Required]
         [Index("IX_Id", IsUnique = true, IsClustered = false)]
         public Guid Id { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         [Required]
-        public string Name { get; set; }
-
-        [StringLength(128)]
-        [Required]
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
 
         public string Description { get; set; }
 
         [Required]
+        public string Uri { get; set; }
+        
+        [Required]        
         public Enumerations.RecordStatus PostStatus { get; set; }
 
         [Required]
@@ -32,9 +31,15 @@ namespace Dk.Schalck.LinkSink.Server.Entity
         [Required]
         public string CreatedBy { get; set; }
 
-        public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
+        [Required]
+        public Guid CreatedByUserId { get; set; }
+        [Required]
+        public User CreatedByUser { get; set; }
 
-        public virtual ICollection<Link> Links { get; set; }
+        [Required]
+        public Guid ProjectId { get; set; }
 
+        [Required]
+        public Project Project { get; set; }
     }
 }
