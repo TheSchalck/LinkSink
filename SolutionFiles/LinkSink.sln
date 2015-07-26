@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkSink.Web", "..\Server\LinkSink.Web\LinkSink.Web.csproj", "{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{5762F5A2-85BE-49AA-8694-57ABB9AD24A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{DF2D6A45-F694-4DED-ABA6-DEB64DBFD231}"
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3DD79CC3-CFA7-4664-BE32-0EF350D9DE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DD79CC3-CFA7-4664-BE32-0EF350D9DE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DD79CC3-CFA7-4664-BE32-0EF350D9DE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,7 +48,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1039FB0D-8FC9-4BEB-869A-38EA3FE23AB1} = {5762F5A2-85BE-49AA-8694-57ABB9AD24A7}
 		{3DD79CC3-CFA7-4664-BE32-0EF350D9DE3B} = {5762F5A2-85BE-49AA-8694-57ABB9AD24A7}
 		{24FED4DB-0870-4F4A-A307-C279537D139E} = {5762F5A2-85BE-49AA-8694-57ABB9AD24A7}
 		{6073BAEC-36A5-4D97-B756-178989F925DF} = {5762F5A2-85BE-49AA-8694-57ABB9AD24A7}
