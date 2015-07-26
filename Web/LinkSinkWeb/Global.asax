@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="LinkSinkWeb.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Dk.Schalck.LinkSink.Web.LinkSinkWeb.MvcApplication" Language="C#" %>

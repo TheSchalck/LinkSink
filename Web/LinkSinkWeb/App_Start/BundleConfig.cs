@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace LinkSinkWeb
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb
 {
     public class BundleConfig
     {

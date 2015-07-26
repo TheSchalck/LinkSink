@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LinkSinkWeb.Models
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

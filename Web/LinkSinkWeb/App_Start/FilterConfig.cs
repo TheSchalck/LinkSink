@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace LinkSinkWeb
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb
 {
     public class FilterConfig
     {

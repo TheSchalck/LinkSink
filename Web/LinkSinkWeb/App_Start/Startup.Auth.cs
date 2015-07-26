@@ -1,13 +1,12 @@
 ﻿using System;
+using Dk.Schalck.LinkSink.Web.LinkSinkWeb.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using LinkSinkWeb.Models;
 
-namespace LinkSinkWeb
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb
 {
     public partial class Startup
     {

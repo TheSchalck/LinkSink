@@ -1,8 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using Dk.Schalck.LinkSink.Web.LinkSinkWeb;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(LinkSinkWeb.Startup))]
-namespace LinkSinkWeb
+[assembly: OwinStartup(typeof(Startup))]
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb
 {
     public partial class Startup
     {

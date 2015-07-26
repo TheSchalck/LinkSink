@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace LinkSinkWeb.Controllers
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb.Controllers
 {
     public class HomeController : Controller
     {

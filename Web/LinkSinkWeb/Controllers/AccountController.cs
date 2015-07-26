@@ -1,16 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Dk.Schalck.LinkSink.Web.LinkSinkWeb.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LinkSinkWeb.Models;
 
-namespace LinkSinkWeb.Controllers
+namespace Dk.Schalck.LinkSink.Web.LinkSinkWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
